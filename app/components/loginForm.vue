@@ -17,7 +17,7 @@ const onError = (err) => {
     <div class="loginCard">
       <h2>Application Token System</h2>
       <div class="loginBox">
-      <p class="loginmsg">Please signup to view the applications...</p>
+      <p class="loginmsg"> Please signup to view the applications...</p>
 
       <ClientOnly>
         <GoogleLoginButton
