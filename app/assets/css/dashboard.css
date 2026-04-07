@@ -1,0 +1,54 @@
+.container{
+ display: flex;
+ align-items: center;
+ flex-direction: column;
+ margin: 12px;
+}
+
+.searchBar{
+  width:100%;
+  max-width: 600px;
+  padding: 10px;
+}
+
+h2{
+      margin-right: 480px;
+}
+
+.mainContainer{
+  display: flex;
+  align-items:center;
+  justify-content: center;
+}
+
+.applicationBox{
+  width: 100%;
+  max-width: 900px;
+  display:flex;
+  flex-direction: column;
+  margin:20px;
+  padding:12px;
+  background-color: rgb(244, 246, 248);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+.logoutBtn {
+  padding: 8px 18px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.logoutBtn:hover{
+  background-color: rgb(161, 6, 6);
+}

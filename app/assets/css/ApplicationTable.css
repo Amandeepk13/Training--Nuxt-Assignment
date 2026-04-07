@@ -1,0 +1,78 @@
+.tableContainer{
+  width:100%;
+  max-width:600px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.applicationTable{
+  width:100%;
+  padding: 16px;
+  border-collapse: collapse;
+
+}
+
+.tableHead{
+  background: black;
+  color: white;
+  text-align: left;
+  
+}
+th{
+  padding: 16px;
+
+}
+td{
+  padding:12px;
+  border-bottom: 1px solid green;
+}
+tbody tr:nth-child(odd){
+  background-color: rgb(211, 210, 210);
+}
+
+.mergeBtn, .mergedBtn{
+  color: white;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 6px;
+  width: 80px;
+}
+
+.mergeBtn{
+  background-color: green;
+}
+.mergedBtn{
+  background-color: gray;
+}
+
+p{
+  padding:12px;
+}
+
+.successBox, .errorBox {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap:8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+}
+
+.errorBox {
+    background: rgb(209, 3, 3);
+}
+.successBox{
+   background: rgb(42, 102, 7);
+}
+
+.closeBtn{
+  display:flex;
+  align-items: center;
+  cursor: pointer;
+  
+}
