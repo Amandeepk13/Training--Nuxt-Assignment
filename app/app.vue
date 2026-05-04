@@ -1,9 +1,13 @@
 <template>
-  <div>
     <NuxtRouteAnnouncer />
-    <NuxtPage />
-  </div>
+    <NuxtLoadingIndicator :throttle="0" :duration="3000"/>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+    
 </template>
-<!-- date
-errormessage
-logout -->
+
+<!-- styling of dashboard, logout alignment, navigation panel.... -->
+
+
+

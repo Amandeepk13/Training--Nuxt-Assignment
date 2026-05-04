@@ -22,5 +22,6 @@ export default defineNuxtConfig({
     session: {
       password: process.env.NUXT_SESSION_PASSWORD || ''
     }
-  }
+  },
+
 })

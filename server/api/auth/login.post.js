@@ -1,7 +1,9 @@
+import { Admin } from "../../models/adminSchema"
+
 export default defineEventHandler( async (event) => {
    const body = await readBody(event);
 
-   const { name, email } = body
+   const { name, email, picture } = body
 
    if(!name){
     throw createError({
@@ -9,10 +11,14 @@ export default defineEventHandler( async (event) => {
     })
    }
 
+   const isAdmin = await Admin.findOne( { email });
+   const role = isAdmin ? 'admin' : 'user';
+
    await setUserSession(event, {
     user:{
-      name, email
+      name, email, picture, role
     }
    })
-  return { message: "Login successful" }; 
+  
+  return { role }; 
 })

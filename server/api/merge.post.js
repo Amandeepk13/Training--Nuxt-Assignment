@@ -39,7 +39,7 @@ export default  defineEventHandler( async(event) => {
 
     app.merged = true;
     app.mergedBy = user;
-    app.status = `Merging in process by ${user}`;
+    app.status = "Not Available";
     app.mergedAt = new Date();
 
     await app.save();

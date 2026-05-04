@@ -1,51 +1,31 @@
 <script setup>
-definePageMeta({
-  middleware:'auth'
-})
 
-
-import { useApplicationStore } from '~/stores/applications';
-
-const store = useApplicationStore()
-
-const { user, clear } = useUserSession()
-
-onMounted(() => {
-  store.fetchApplications();
-
-  setInterval(()=> {
-    store.fetchApplications();
-  },5000);
-});
-
-const handleLogout = async() => {
-  await clear()
-  navigateTo('/login')
-}
+// definePageMeta({
+//   middleware:'auth'
+// })
 
 </script>
 
 <template>
   <div class="mainContainer">
-    <div class="applicationBox">
-      <div class="header">
-          <h1> Welcome {{ user.name }} ! </h1>
-          <button class="logoutBtn" @click="handleLogout">Logout</button>
-      </div>
-      <div class="container">
-        <input type="search" placeholder="Search applications by name..." class="searchBar" v-model= "store.search">
-        <h2>Applications</h2>
-        
-        <ApplicationTableList :appsList="store.filteredApplications"/>
-      </div>
-    </div>
-      
+    <DashboardContent />
   </div>
 </template>
 
 
 
-<style scoped src='~/assets/css/dashboard.css'>
+<style lang="scss" scoped>
+
+.mainContainer{
+ min-height: 100vh;
+ background-color: rgba(240, 241, 243, 0.338);
+ padding:20px;
+ display: flex;
+ justify-content: center;
+ margin:4px;
+ font-family: Arial, Helvetica, sans-serif;
+ 
+}
 
 </style>
 

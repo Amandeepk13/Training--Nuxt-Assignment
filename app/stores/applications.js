@@ -3,15 +3,21 @@ import { defineStore } from "pinia";
 export const useApplicationStore = defineStore("applicationsStore", {
   state: () => ({
     applicationsList: [],
-    search: ""
+    search: "",
+    selectedType: "All Types",
+    selectedStatus: "All Status"
   }),
 
 
   getters: {
     filteredApplications(state) {
-      return state.applicationsList.filter(app =>
-        app.name.toLowerCase().includes(state.search.toLowerCase())
-      )
+      return state.applicationsList.filter(app => {
+        const matchedSearch = app.name.toLowerCase().includes(state.search.toLowerCase());
+        const matchedType = state.selectedType === "All Types" || app.type.toLowerCase() === state.selectedType.toLowerCase();
+        const matchedStatus = state.selectedStatus === "All Status" || app.status === state.selectedStatus;
+
+        return matchedSearch && matchedType && matchedStatus;
+    });
     }
   },
 
@@ -28,6 +34,15 @@ export const useApplicationStore = defineStore("applicationsStore", {
         body: { applicationName}
       });
 
+      await this.fetchApplications();
+    },
+
+    async createApplication(data){
+      await $fetch('/api/applications', {
+        method: 'POST',
+        body: data
+
+      })
       await this.fetchApplications();
     }
   }

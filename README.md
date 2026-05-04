@@ -1,75 +1,31 @@
-# Nuxt Minimal Starter
+# Training - Nuxt Assignment
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+The assignment focused on building a **"Merge Token - Repository Management System"** that allows user to manage repository tokens and collaborate in a team, can track the applications, its availability and status; hence preventing ambiguous access to a particular token.
 
-## Setup
+## Features
+- Secure login using **Google Auth Integration** 
+- Dynamic access control to users based on their roles.  
+- Auth Middleware to prevent unauthorized URL manipulation. ( Eg. Normal users are blocked from accessing '/admin' routes)  
+- Only Admin have access to create new repositories.
+- Users can view, search or filters the applications.
 
-Make sure to install dependencies:
+## Tech Stack 
+- **Frontend** : Nuxt 3( Vue Engine ), Pinia , SCSS(Styling)
+- **Backend** : Nuxt 3(Nitro Server) , MongoDB (database), nuxt-auth-utils(session)
 
-```bash
-# npm
-npm install
 
-# pnpm
-pnpm install
+## Login Page
+![capture_20260424181558675.bmp](https://github.com/user-attachments/files/27052963/capture_20260424181558675.bmp)
 
-# yarn
-yarn install
+## User View (Dashboard)
+![capture_20260424180719586.bmp](https://github.com/user-attachments/files/27052258/capture_20260424180719586.bmp)
 
-# bun
-bun install
-```
+## Admin View 
+(https://go.screenpal.com/watch/cOfZXYnOz5g)
 
-## Development Server
+### Admin Dashboard View
+![capture_20260504095313168.bmp](https://github.com/user-attachments/files/27329651/capture_20260504095313168.bmp)
 
-Start the development server on `http://localhost:3000`:
 
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+### Admin Panel View
+![capture_20260504095429804.bmp](https://github.com/user-attachments/files/27329672/capture_20260504095429804.bmp)

@@ -1,7 +1,5 @@
 <script setup>
 
-import { useApplicationStore } from '~/stores/applications';
-
 const store = useApplicationStore()
 const {user} = useUserSession()
 
@@ -43,35 +41,175 @@ const handleMerge = async (applicationName, application) =>{
 
     <thead class="tableHead">
        <tr>
-        <th>Application Name</th>
-        <th>Status</th>
-        <th>Action</th>
+        <th>Repository Name</th>
+        <th>Type</th>
+          <th>Description</th>
+          <th>Token Status</th>
+          <th>Token Holder</th>
+          <th>Taken At</th>
+          <th>Actions</th>
        </tr>
     </thead>
 
     <tbody class="tableBody">
        <tr v-for="application in appsList" :key="application.name">
         <td>{{ application.name }}</td>
-        <td>{{ application.status }} <br><br>
-          <span v-if ="application.merged">Merged At: {{ new Date(application.mergedAt).toLocaleString() }}</span>
+        <td>
+            <span class="typeBadge" :class="application.type.toLowerCase()">{{ application.type}}</span>
+          </td>
+        <td> {{ application.description }}</td>
+        <td> <span class="statusBadge" :class="application.status.toLowerCase().replace(' ', '-')">{{ application.status }} </span>
+          
         </td>
-        <td><button @click="handleMerge(application.name,application)" :disabled="application.merged && application.mergedBy !== user.name"  :class="application.merged ? 'mergedBtn' : 'mergeBtn'"> {{ application.merged ? 'Merged' : 'Merge' }}</button></td>
+        <td> {{ application.mergedBy || '-'}}</td>
+        <td> {{ application.mergedAt ? new Date(application.mergedAt).toLocaleString() : '-' }}</td>
+
+        <td><button @click="handleMerge(application.name,application)" :disabled="application.merged && application.mergedBy !== user.name"  :class="application.merged ? 'mergedBtn' : 'mergeBtn'">
+          <span class="btnContent">
+            <img src="../assets/img/lock.svg"/>
+            {{ application.merged ? 'Taken' : 'Take' }}
+          </span> </button></td>
        </tr>
     </tbody>
   </table>
   <p v-if="appsList.length === 0">No such repository is there !!!</p>
   </div>
-   <div v-if="showMsg" :class="isError ? 'errorBox' : 'successBox'">
+   <div v-if="showMsg" :class="isError ? 'notification errorBox' : 'notification successBox'">
      <span>{{ message }}</span>
-     <span class="closeBtn" @click="showMsg = false"><svg xmlns="http://www.w3.org/2000/svg" width="15"  height="15" viewBox="0 0 50 50">
-       <path d="M 7.71875 6.28125 L 6.28125 7.71875 L 23.5625 25 L 6.28125 42.28125 L 7.71875 43.71875 L 25 26.4375 L 42.28125 43.71875 L 43.71875 42.28125 L 26.4375 25 L 43.71875 7.71875 L 42.28125 6.28125 L 25 23.5625 Z"></path>
-       </svg>
-      </span>
+     <span class="closeBtn" @click="showMsg = false"><img src="../assets/img/crossIcon.svg" />
+     </span>
    </div>
 
 </template>
 
 
-<style scoped src='~/assets/css/ApplicationTable.css'>
+<style lang ="scss" scoped >
+ 
+ .tableContainer{
+  width:100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+  
+}
+
+.applicationTable{
+  width:100%;
+  padding: 16px;
+  border-collapse: collapse;
+
+}
+
+.tableHead{
+  
+  text-align: left;
+  border-bottom: 1px solid black;
+}
+th{
+  padding: 16px;
+
+}
+td{
+  padding:12px;
+  border-bottom: 1px solid rgb(224, 222, 222);
+}
+/* tbody tr:nth-child(odd){
+  background-color: rgb(211, 210, 210);
+} */
+
+.mergeBtn, .mergedBtn{
+  color: white;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 6px;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mergeBtn{
+  background-color: black;
+}
+.mergedBtn{
+  background-color: gray;
+}
+
+p{
+  padding:12px;
+}
+
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 10%;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap:8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+
+    &.errorBox {
+    background-color: rgb(245, 69, 69);
+    }
+    &.successBox{
+    background-color: rgb(93, 190, 38);
+   }
+   
+   .closeBtn{
+     display:flex;
+     align-items: center;
+     cursor: pointer;
+  
+}
+}
+
+
+
+
+
+.typeBadge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size:12px;
+  
+  &.applications {
+    background-color: rgba(185, 216, 247, 0.689);
+    color:rgb(4, 31, 117);
+  }
+  &.stacks {
+    background-color: rgba(247, 189, 247, 0.728);
+    color:rgb(171, 4, 171);
+  }
+  &.library {
+    background-color: rgba(196, 247, 196, 0.735);
+    color:rgb(4, 58, 12);
+  }
+}
+
+.statusBadge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size:12px;
+
+  &.available {
+    background-color: black;
+    color:white;
+  }
+  &.not-available {
+    background-color: rgb(190, 190, 190);
+    color:gray;
+  }
+}
+
+.btnContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 
 </style>
