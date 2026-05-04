@@ -15,16 +15,17 @@ The assignment focused on building a **"Merge Token - Repository Management Syst
 
 
 ## Login Page
-[capture_20260424181255037.bmp](https://github.com/user-attachments/files/27052486/capture_20260424181255037.bmp)
+![capture_20260424181558675.bmp](https://github.com/user-attachments/files/27052963/capture_20260424181558675.bmp)
 
 ## User View (Dashboard)
-[capture_20260424180719586.bmp](https://github.com/user-attachments/files/27052258/capture_20260424180719586.bmp)
+![capture_20260424180719586.bmp](https://github.com/user-attachments/files/27052258/capture_20260424180719586.bmp)
 
 ## Admin View 
 (https://go.screenpal.com/watch/cOfZXYnOz5g)
 
 ### Admin Dashboard View
-[capture_20260424180935424.bmp](https://github.com/user-attachments/files/27052339/capture_20260424180935424.bmp)
+![capture_20260504095313168.bmp](https://github.com/user-attachments/files/27329651/capture_20260504095313168.bmp)
+
 
 ### Admin Panel View
-[capture_20260424181255037.bmp](https://github.com/user-attachments/files/27052405/capture_20260424181255037.bmp)
+![capture_20260504095429804.bmp](https://github.com/user-attachments/files/27329672/capture_20260504095429804.bmp)

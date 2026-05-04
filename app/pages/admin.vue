@@ -65,12 +65,12 @@
    .sidebar{
      width:28px;
      min-height: 100vh;
-     padding:20px;
+     padding:20px 0px;
      overflow: hidden;
      transition: 0.3s ease;
 
      &:hover{
-      width:250px;
+      width:190px;
      }
 
      .sidebarContainer{
@@ -87,12 +87,12 @@
       }
     
       .linkBtn{
-        width:180px;
+        width:150px;
         display:flex;
         align-items: center;
         gap:12px;
         border:none;
-        padding:12px 18px;
+        padding:12px 8px;
         cursor:pointer;
         border-radius:8px;
         font-weight: 600;
@@ -122,10 +122,9 @@
     .content{
       flex:1;
       margin:2px;
-      padding:4px;
       box-sizing: border-box; 
-      box-shadow: -2px 0 2px rgba(140, 168, 244, 0.354);
-      background-color: rgba(236, 239, 248, 0.621);
+      box-shadow: -2px 0 2px rgba(159, 182, 245, 0.354);
+      background-color: rgba(240, 241, 243, 0.338);
       border-radius:8px;
       padding: 10px 28px 28px;
       min-height: 100vh;
