@@ -7,7 +7,8 @@ const applicationSchema = new mongoose.Schema({
   merged: { type: Boolean, default: false },
   mergedBy: { type: String, default: null},
   mergedAt: { type: Date, default: null},
-  description: { type: String, default: 'No description provided'}
+  description: { type: String, default: 'No description provided'},
+  repositoryLink: { type: String }
 
 })
 

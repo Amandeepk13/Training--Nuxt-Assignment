@@ -1,47 +1,48 @@
-import { Applications } from "../models/Applications";
+import { dbOperations } from "../utils/dbOperation";
 
-export default  defineEventHandler( async(event) => {
+export default defineEventHandler(async (event) => {
+  const session = await getUserSession(event);
+  const user = session.user.name;
 
-   const session = await getUserSession(event)
-   const user = session.user.name
+  if (!user) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: "Access Denied. Authenticate first",
+    });
+  }
 
-   if(!user){
-     throw createError({
-      statusCode: 401
-     })
-   }
-    const body = await readBody(event);
+  const body = await readBody(event);
 
-    const { applicationName} = body;
+  const { applicationName } = body;
 
-    const app = await Applications.findOne({name: applicationName});
+  const app = await dbOperations.findByName(applicationName);
 
-  
-    if(app.merged){
+  if (app.merged) {
 
-      if(app.mergedBy === user){
-        app.merged = false;
-        app.mergedBy = null;
-        app.mergedAt = null;
-        app.status = 'Available';
-        await app.save();
+    if (app.mergedBy === user) {
+      app.merged = false;
+      app.mergedBy = null;
+      app.mergedAt = null;
+      app.status = "Available";
 
-        return { message : "Done merging"}
-      }
+      await dbOperations.saveApp(app);
 
-      throw createError({
-        statusCode: 400,
-        data: {
-          mergedBy : app.mergedBy
-        }
-      })
+      return { message: "Done merging. Token is relieved" };
     }
 
-    app.merged = true;
-    app.mergedBy = user;
-    app.status = "Not Available";
-    app.mergedAt = new Date();
+    throw createError({
+      statusCode: 400,
+      statusMessage: "This token is being taken and the Repository is in merging zone.",
+      data: {
+        mergedBy: app.mergedBy,
+      },
+    });
+  }
 
-    await app.save();
+  app.merged = true;
+  app.mergedBy = user;
+  app.status = "Not Available";
+  app.mergedAt = new Date();
 
-})
+  await dbOperations.saveApp(app);
+});

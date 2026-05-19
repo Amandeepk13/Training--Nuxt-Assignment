@@ -5,9 +5,10 @@ export default defineEventHandler( async (event) => {
 
    const { name, email, picture } = body
 
-   if(!name){
+   if(!name || !email || !picture){
     throw createError({
-      statusCode: 400
+      statusCode: 400,
+      statusMessage: "Fulfill all the credentials for authentication."
     })
    }
 

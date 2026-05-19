@@ -3,7 +3,8 @@ export default defineEventHandler( async(event) => {
 
   if(!session.user){
     throw createError({
-      statusCode: 401
+      statusCode: 401,
+      statusMessage: "Access Denied. Please authenticate"
     })
   }
 

@@ -5,16 +5,10 @@ import pushIcon from '~/assets/img/git-pushicon.svg'
  const { user, clear } = useUserSession()
  
 
- const showDropdown = ref(false)
-
- const toggleDropdown = () => {
-  showDropdown.value = !showDropdown.value
- }
-
  const handleLogout = async() => {
-  const loader = useLoadingIndicator()
+  const loader = useGlobalLoader()
 
-  loader.start({ force: true })   
+  loader.value = true   
 
   try {
     await $fetch('/api/auth/logout', { 
@@ -24,51 +18,53 @@ import pushIcon from '~/assets/img/git-pushicon.svg'
     navigateTo('/login')
 
   } finally {
-    loader.finish()               
+      loader.value = false              
   }
 
 }
 
   const route = useRoute()
   const isAdmin = computed( () => route.path === '/admin')
+
+  
 </script>
 
 <template>
   <header class = "header">
       <div class="headerContent">
 
-       <div class="leftSection">
+       <div class="leftSection" aria-labelledby= "app-title app-subtitle" tabindex="0">
           <div class="logoBox">
-            <img :src= "isAdmin ? pushIcon : mergeIcon "  class="mergeLogo" alt="Logo"/>
+            <img :src= "isAdmin ? pushIcon : mergeIcon "  class="mergeLogo" alt="Logo" aria-hidden="true" />
           </div>
-          <div class="title">
-            <h2>Merge Token</h2>
-            <p>Repository Management</p>
+          <div class="title" aria-hidden="true">
+            <h2 id="app-title">Merge Token</h2>
+            <p id="app-subtitle">Repository Management</p>
           </div>
        </div>
 
-       <div class="rightSide" >
-
+       <div class="dropdown rightSide" role="Dropdown" aria-label="Click to display dropdown menu." tabindex="0">
 
        
-       <div class="userInfo" @click="toggleDropdown">
+       <div class="userInfo dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" >
           <div v-if="user?.picture" class="userPicContainer">
-            <img :src="user.picture" class="userPic" alt="User Profile"  referrerPolicy="no-referrer"/>
+            <img :src="user.picture" class="userPic" alt="User Profile"  referrerPolicy="no-referrer" aria-hidden="true"/>
           </div>
           <div class="usernameContainer">
-            <span class="username">{{ user?.name }}</span>
-            <img src="../assets/img/dropdown.svg"  />
+            <span class="username" aria-hidden="true">{{ user?.name }}</span>
+            <img src="../assets/img/dropdown.svg" aria-hidden="true" />
           </div>
           
           
         </div>
 
-          <div v-if="showDropdown" class="dropdownMenu">
-            
-            <button @click="handleLogout" class="LogoutBtn">
-              <img src="../assets/img/logout.svg" alt="logout" class="logoutIcon"/> Logout 
+        <ul class="dropdown-menu customDropdownMenu">
+          <li> 
+            <button @click="handleLogout" class="dropdown-item LogoutBtn" type="button" aria-label="Click to logout" >
+              <img src="../assets/img/logout.svg" alt="logout" class="logoutIcon" aria-hidden="true"/> Logout 
             </button>
-          </div>
+          </li> 
+        </ul>
         
        </div>
       </div>

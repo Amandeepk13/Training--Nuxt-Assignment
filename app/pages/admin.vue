@@ -6,6 +6,7 @@
 
   const appStore = useApplicationStore()
   const currentlyActive = ref("dashboard")
+  const isSidebarOpen = ref(true)
 
   const goToAddRepository = () => {
     currentlyActive.value = "addRepository"
@@ -13,22 +14,28 @@
   const goToDashboard = () => {
     currentlyActive.value = "dashboard"
   }
-
+  const toggleSidebar = () => {
+    isSidebarOpen.value = !isSidebarOpen.value
+  }
 </script>
 
 <template>
   <div class="adminPage">
 
-    <aside class="sidebar">
+    <aside class="sidebar" :class="{ collapsed: !isSidebarOpen }">
+
+      <button class="toggleBtn" @click="toggleSidebar" :aria-label="isSidebarOpen ? 'Close sidebar' : 'Open sidebar'" >
+        <img src="../assets/img/menuIcon.svg" aria-hidden="true"/>
+      </button>
 
       <nav class="sidebarContainer">
         <ul>
           <li 
-            class="linkBtn dashboard" :class=" currentlyActive === 'dashboard' ? 'active' : '' " @click="goToDashboard">Dashboard
+            class="linkBtn dashboard" :class=" currentlyActive === 'dashboard' ? 'active' : '' " @click="goToDashboard" tabindex="0" aria-label="Click to activate Dashboard"> Dashboard
           </li>
           
           <li 
-            class="linkBtn addrepo" :class=" currentlyActive === 'addRepository' ? 'active' : '' " @click="goToAddRepository">Add Repository
+            class="linkBtn addrepo" :class=" currentlyActive === 'addRepository' ? 'active' : '' " @click="goToAddRepository" tabindex="0" aria-label="Click to activate Add Repository Form">Add Repository
           </li>
         </ul>
       </nav>
@@ -36,18 +43,20 @@
     </aside>
 
     <section class = "content">
+      
 
-      <div class="contentContainer" v-if="currentlyActive === 'addRepository'">
+      <div class="contentContainer" v-show="currentlyActive === 'addRepository'">
         
-         <h1>Admin Panel</h1>
-         <p>Manage repositories from a single admin workspace</p>
+         <h1 tabindex="0">Admin Panel</h1>
+         <p tabindex="0">Manage repositories from a single admin workspace</p>
 
          <AddRepository />
          
        
       </div>
-      <div class="adminDashboard">
-      <DashboardContent v-if="currentlyActive === 'dashboard'" :appsList="appStore.filteredApplications" />
+
+      <div class="adminDashboard" v-show="currentlyActive === 'dashboard'">
+        <DashboardContent  :appsList="appStore.filteredApplications" />
       </div>
     </section>
 
@@ -63,19 +72,45 @@
   }
    
    .sidebar{
-     width:28px;
+     width:220px;
      min-height: 100vh;
      padding:20px 0px;
      overflow: hidden;
      transition: 0.3s ease;
+     position:relative;
 
-     &:hover{
-      width:190px;
+     &.collapsed{
+      width:28px;
+
+      .sidebarContainer{
+        opacity:0;
+        visibility:hidden;
+        
      }
 
+     }
+
+     .toggleBtn{
+        position: absolute;
+        top: 20px;
+        right: -10px;
+        width: 38px;
+        height: 44px;
+        border: none;
+        border-radius: 14px;
+        background: rgb(171, 171, 173);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        transition: 0.2s ease;
+      }
+
      .sidebarContainer{
-      display:flex;
+      display:flex; 
       flex-direction: column;
+      padding:2px 6px;
 
       ul{
         padding: 2px;
@@ -95,9 +130,11 @@
         padding:12px 8px;
         cursor:pointer;
         border-radius:8px;
+        font-size: 14px;
         font-weight: 600;
-        background-color: rgb(166, 192, 240);
-        color:rgb(27, 85, 230);
+        background-color: rgba(194, 200, 205, 0.854);
+        color: rgb(75, 74, 74);
+        transition:0.2s ease;
 
 
         &::before {
@@ -105,7 +142,7 @@
           width: 12px;
           height:12px;
           border-radius: 4px;
-          background-color: rgb(17, 101, 245);
+          background-color: gray;
         }
         
         &.active {
@@ -113,7 +150,7 @@
           color:white;
 
           &::before {
-            background-color: orange;
+            background-color: rgb(17, 101, 245);
           }
         }
       }
@@ -123,12 +160,12 @@
       flex:1;
       margin:2px;
       box-sizing: border-box; 
-      box-shadow: -2px 0 2px rgba(159, 182, 245, 0.354);
+      box-shadow: -2px 0 2px rgba(121, 121, 123, 0.345);
       background-color: rgba(240, 241, 243, 0.338);
       border-radius:8px;
-      padding: 10px 28px 28px;
+      padding: 10px 28px;
       min-height: 100vh;
-      
+      position: relative;
     }
    
     .contentContainer{
@@ -138,9 +175,10 @@
       display:flex;
       flex-direction:column;
       
+      
 
       h1{
-        font-size:30px;
+        font-size:32px;
         margin-bottom:2px;
       }
       p{
@@ -155,6 +193,7 @@
       display:flex;
       align-items: center;
       justify-content: center;
+      padding: 4px;
     }
 
 </style>

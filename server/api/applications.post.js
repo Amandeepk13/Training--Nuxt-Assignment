@@ -1,23 +1,48 @@
-import { Applications } from "../models/Applications";
+
+import { dbOperations } from "../utils/dbOperation";
 
 export default defineEventHandler(async(event)=>{
-  const body = await readBody(event)
 
-  const { name, type, description} = body;
+  const session = await getUserSession(event);
 
-
-  const exists = await Applications.findOne({ name: { $regex: new RegExp(`^${name}$`, 'i') }})
-  
-  if(exists){
+  if(!session.user || session.user.role !== "admin"){
     throw createError({
-      statusCode: 400,
-      statusMessage: "Repo already present"
+      statusCode: 403,
+      statusMessage: "Access Denied. Only Admins are authorized"
     })
   }
 
-  const newApplication = new Applications({
-      name, type , description
-  })
 
-  await newApplication.save();
+  const body = await readBody(event)
+
+  const { name, type, description, repositoryLink } = body;
+
+  if(!name || !type || !description || !repositoryLink){
+    throw createError({
+      statusCode: 400,
+      statusMessage: "All fields are required."
+    })
+  }
+
+  const exists = await dbOperations.findByName(name);
+
+  if (exists) {
+
+    throw createError({
+      statusCode: 400,
+      statusMessage: "This Repository is already present"
+    });
+
+  }
+
+  await dbOperations.createApp({
+    name,
+    type,
+    description,
+    repositoryLink
+  });
+
+
+  return { success: true, message: "Repository created successfully" };
+  
 })
