@@ -20,7 +20,7 @@
 </script>
 
 <template>
-  <div class="adminPage">
+  <div class="adminPage container-fluid">
 
     <aside class="sidebar" :class="{ collapsed: !isSidebarOpen }">
 
@@ -69,6 +69,10 @@
     display:flex;
     font-family: Arial, Helvetica, sans-serif;
     margin: 2px;
+    flex-direction: row;
+    width:100%;
+    padding:0;
+    overflow-x:hidden;
   }
    
    .sidebar{
@@ -195,5 +199,51 @@
       justify-content: center;
       padding: 4px;
     }
+
+
+@media (max-width: 768px){
+
+  .adminPage{
+    flex-direction: column;
+  }
+
+  .sidebar{
+    width:100% ;
+    min-height:auto ;
+    padding:12px ;
+
+    &.collapsed{
+      width:100% ;
+   }
+
+   .linkBtn{
+      width:auto ;
+      min-width:140px;
+      justify-content:center;
+    }
+  }
+
+
+  .sidebarContainer{
+    visibility:visible !important;
+
+    ul{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
+    }
+  }
+ 
+  .toggleBtn{
+    display:none !important;
+  }
+
+  .content{
+    padding:16px ;
+    min-height:auto ;
+  }
+}
+  
 
 </style>

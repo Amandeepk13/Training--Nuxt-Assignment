@@ -138,7 +138,8 @@ const formatDateTime = (date) => {
  .tableContainer{
   width:100%;
   border-radius: 12px;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   margin: 20px auto;
   
@@ -146,7 +147,7 @@ const formatDateTime = (date) => {
 
 .applicationTable{
   width:100%;
-  padding: 16px;
+  min-width: 1000px;
   border-collapse: collapse;
 
 }

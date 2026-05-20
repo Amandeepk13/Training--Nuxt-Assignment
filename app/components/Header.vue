@@ -39,7 +39,7 @@ import pushIcon from '~/assets/img/git-pushicon.svg'
           </div>
           <div class="title" aria-hidden="true">
             <h2 id="app-title">Merge Token</h2>
-            <p id="app-subtitle">Repository Management</p>
+            <p id="app-subtitle" class="d-none d-md-block">Repository Management</p>
           </div>
        </div>
 
@@ -50,7 +50,7 @@ import pushIcon from '~/assets/img/git-pushicon.svg'
           <div v-if="user?.picture" class="userPicContainer">
             <img :src="user.picture" class="userPic" alt="User Profile"  referrerPolicy="no-referrer" aria-hidden="true"/>
           </div>
-          <div class="usernameContainer">
+          <div class="usernameContainer d-none d-md-flex">
             <span class="username" aria-hidden="true">{{ user?.name }}</span>
             <img src="../assets/img/dropdown.svg" aria-hidden="true" />
           </div>

@@ -31,7 +31,8 @@ onUnmounted(async () => {
       <p tabindex="0">Manage and track token access across all repositories</p>
     </section>
 
-    <div class="filterBars">
+    <div class="row g-3 align-items-center filterBars">
+      <div class="col-12 col-lg">
       <div class="searchBar">
         <span class="searchIcon">
           <img src="../assets/img/searchIcon.svg" aria-hidden="true" />
@@ -44,7 +45,9 @@ onUnmounted(async () => {
           aria-label="Enter the repository name to search"
         />
       </div>
+      </div>
 
+      <div class="col-12 col-md-6 col-lg-auto">
       <div class="dropdown customDropdown">
         <button class="btn dropdown-toggle filterBtn" type="button" data-bs-toggle="dropdown">
           {{ store.selectedType }}
@@ -78,7 +81,10 @@ onUnmounted(async () => {
 
         </ul>
       </div>
+      </div>
 
+
+      <div class="col-12 col-md-6 col-lg-auto">
       <div class="dropdown customDropdown">
         <button class="btn dropdown-toggle filterBtn" type="button" data-bs-toggle="dropdown">
           {{ store.selectedStatus }}
@@ -107,6 +113,8 @@ onUnmounted(async () => {
           
         </ul>
       </div>
+      </div>
+
     </div>
 
     <ApplicationTableList :appsList="store.filteredApplications" />
@@ -186,6 +194,9 @@ onUnmounted(async () => {
 
   &::after {
     display: none;
+  }
+  &:focus{
+    outline:2px solid black;
   }
 }
 

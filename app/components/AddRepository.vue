@@ -60,17 +60,18 @@ const isFormCompleted = computed(() => {
 
     <div class="formCard">
       <form class="addRepoForm" @submit.prevent="createRepo">
-        <div class="formgroup">
-          <label>Repository Name</label><br />
-          <input
-            v-model="repoName"
-            type="text"
-            placeholder="Enter the repository name"
-            required
-          />
+        <div class="row g-2 mb-2">
+          <div class="col-12">
+            <div class="formgroup">
+              <label>Repository Name</label><br />
+              <input v-model="repoName" type="text" placeholder="Enter the repository name" required />
+            </div>
+          </div>
         </div>
 
-        <div class="formgroupCont">
+      <div class="formgroupCont row g-2 mb-2">
+
+       <div class="col-12 col-md-5">
 
         <div class="formgroup">
           <label>Repository Type</label><br />
@@ -111,33 +112,50 @@ const isFormCompleted = computed(() => {
           </div>
         </div>
 
-        <div class="formgroup repoLinkField">
+       </div>
+      
+       <div class="repoLinkField col-12 col-md-7">
+        <div class="formgroup">
           <label>Repository Link</label><br />
           <input v-model="repoLink" type="url" placeholder="Enter the url of repository" required/>
         </div>
-
         </div>
 
-        <div class="formgroup">
-          <label>Repository Description</label><br />
-          <textarea v-model="repoDesc" rows="5" placeholder="Short summary of this repository and purpose" required>
-          </textarea>
-        </div>
+       </div>
 
-        <div class="formgroup last">
-          <div class="tokenField">
-            <label>Initial Token Status</label><br />
-            <input type="text" value="Available" disabled />
+       <div class="row g-2 mb-2">
+        <div class="col-12">
+           <div class="formgroup">
+              <label>Repository Description</label><br />
+              <textarea v-model="repoDesc" rows="5" placeholder="Short summary of this repository and purpose" required>
+              </textarea>
+            </div>
           </div>
 
-          <div class="formActions">
-            <button type="button" class="cancelBtn" @click="resetFields">
+        </div>
+
+        <div class="row g-2 align-items-end mb-2">
+
+          <div class="col-12 col-md-6">
+            <div class="formgroup">
+              <label>Initial Token Status</label><br />
+              <input type="text" value="Available" disabled />
+            </div>
+          </div>
+           
+          <div class="col-12 col-md-6 d-flex">
+            <div class="formActions d-flex flex-column flex-sm-row">
+              <button type="button" class="cancelBtn " @click="resetFields">
               Cancel
-            </button>
-            <button type="submit" class="createBtn" :disabled="!isFormCompleted || isCreating" >
+              </button>
+              <button type="submit" class="createBtn " :disabled="!isFormCompleted || isCreating" >
               {{ isCreating ? "Creating.." : "Create" }}
-            </button>
+              </button>
           </div>
+
+          </div>
+
+          
         </div>
       </form>
 
@@ -177,9 +195,7 @@ const isFormCompleted = computed(() => {
     padding: 0px 12px;
     margin: 0;
 
-    .addRepoForm {
-      display: flex;
-      flex-direction: column;
+  
 
       .formgroup {
         display: flex;
@@ -202,19 +218,19 @@ const isFormCompleted = computed(() => {
         .tokenField {
           display: flex;
           flex-direction: column;
-        }
+        } 
+        
       }
 
-      .last {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-
-        .formActions {
+      .formActions {
           display: flex;
-          flex-direction: row;
+          justify-content: flex-end;
+          align-items: center;
           gap: 8px;
-          padding: 12px;
+          width: 100%;
+          padding: 8px 0;
+          flex-wrap: nowrap;
+          margin-left: auto;
 
           button {
             border: 1px solid rgba(235, 227, 227, 0.874);
@@ -225,6 +241,7 @@ const isFormCompleted = computed(() => {
             color: black;
             height: 50px;
             cursor: pointer;
+            min-width:120px;
           }
 
           button:hover {
@@ -236,16 +253,6 @@ const isFormCompleted = computed(() => {
             cursor: not-allowed;
           }
         }
-      }
-    }
-    .formgroupCont{
-      display:flex;
-      align-items:flex-start;
-      gap: 50px;
-    }
-    .repoLinkField {
-      flex: 1;
-    }
   }
 
   .notification {
@@ -279,6 +286,9 @@ const isFormCompleted = computed(() => {
 
   &::after{
     display:none;
+  }
+  &:focus{
+    outline:2px solid black;
   }
 }
 
