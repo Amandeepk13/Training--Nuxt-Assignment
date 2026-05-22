@@ -1,6 +1,6 @@
 <script setup>
 
- const { isLoading } = useLoadingIndicator()
+ const { isLoading } = useGlobalLoader()
 
 </script>
 

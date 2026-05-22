@@ -1,15 +1,24 @@
-import { Applications } from "../models/Applications";
+import { dbOperations } from "../utils/dbOperation";
 
-export default defineEventHandler(async() => {
+export default defineEventHandler(async(event) => {
+
+  const session = await getUserSession(event);
+
+  if(!session.user){
+    throw createError({
+      statusCode: 401,
+      statusMessage: "Access Denied.Please Authenticate first"
+    })
+  }
   
   try{
-    const apps = await Applications.find()
-    return apps;
+    return await dbOperations.getApp();
+
     }
      catch(err){
       throw createError({
         statusCode: 500,
-        statusMessage: "can't fetch"
+        statusMessage: "Internal Server error"
       })
-      }  
+    }  
 })

@@ -1,13 +1,16 @@
+<script setup>
+const loader = useGlobalLoader()
+</script>
+
 <template>
     <NuxtRouteAnnouncer />
-    <NuxtLoadingIndicator :throttle="0" :duration="3000"/>
+    <appLoader v-if="loader" />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
     
 </template>
 
-<!-- styling of dashboard, logout alignment, navigation panel.... -->
 
 
 

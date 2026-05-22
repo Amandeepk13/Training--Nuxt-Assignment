@@ -6,7 +6,7 @@
   font-family: Arial, Helvetica, sans-serif;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   border-radius:6px;
-  height: 60px;
+  min-height: 60px;
   box-sizing: border-box;
   
 
@@ -16,7 +16,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+    min-height: 60px;
   }
 
   .leftSection{
@@ -42,13 +42,20 @@
   } 
 
   .title{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    
+
     h2{
       font-size:14px;
-      
+      margin:0;
+      padding:0;
     }
     p{
       font-size:10px;
       color:gray;
+      margin: 0;
     }
   }
 
@@ -62,8 +69,15 @@
     .userInfo{
       display: flex;
       align-items: center;
-      gap: 10px;
       cursor: pointer;
+      border-radius: 22px;
+      border: 1px solid #a8a5a573;
+      padding: 6px;
+      gap: 4px;
+
+      &::after {
+        display: none !important;
+      }
     }
 
     .userPicContainer{
@@ -79,8 +93,6 @@
       border-radius:50%;
     }
     .usernameContainer{
-      display:flex;
-      flex-direction: row;
       align-items: center;
       justify-content: center;
       gap:6px;
@@ -90,42 +102,31 @@
       font-weight: 500;
     }
     
-    .dropdownMenu{
-      position:absolute;
-      top: 50px;
-      width:100%;
-      background-color: white;
-      border-radius: 8px;
-      padding:8px;
-      display:flex;
-      flex-direction: column;
-      gap:5px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      cursor: pointer;
-    
-    .LogoutBtn, .menuBtn{
-      width:100%;
+    .customDropdownMenu{
+      min-width: 140px;
       border: none;
-      cursor:pointer;
-      background-color: red;
-      padding:8px;
-      border-radius: 8px;
-      color: white;
-      display:flex;
-      align-items: center;
-      justify-content: center;
-      gap:6px;
+      border-radius: 12px;
+      padding: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    
+      .LogoutBtn, .menuBtn{
+        background-color: rgba(223, 227, 230, 0.589);
+        padding:8px;
+        border-radius: 8px;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        gap:6px;
 
-      .logoutIcon{
-        color:white;
-        stroke:white;
-      }
+        .logoutIcon{
+          color:black;
+          stroke:black;
+        }
     }
-    .menuBtn{
-        background-color: rgb(9, 145, 9);
-      }
+    
     }
 
   }
 
 }
+

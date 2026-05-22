@@ -24,26 +24,44 @@ export const useApplicationStore = defineStore("applicationsStore", {
   actions: {
 
     async fetchApplications() {
-      const data = await $fetch('/api/applications');
-      this.applicationsList = data;
+      try{
+        const data = await $fetch('/api/applications');
+        this.applicationsList = data;
+
+      } catch(err){
+        console.error(err);
+      }
     },
 
     async mergeApplication(applicationName){
-      await $fetch("/api/merge", {
+
+      try{
+        await $fetch("/api/merge", {
         method: "POST",
         body: { applicationName}
       });
 
       await this.fetchApplications();
+
+      } catch(err){
+        console.error(err);
+        throw err;
+      }
     },
 
     async createApplication(data){
-      await $fetch('/api/applications', {
+      try{
+        await $fetch('/api/applications', {
         method: 'POST',
         body: data
 
       })
       await this.fetchApplications();
+      
+     } catch(err){
+       console.error(err);
+       throw err;
+     } 
     }
   }
 

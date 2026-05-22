@@ -2,11 +2,17 @@
 export default defineNuxtConfig({
   compatibilityDate: '2026-04-01',
   devtools: false,
+
+  css: [
+    "bootstrap/dist/css/bootstrap.min.css"
+  ],
+
   
   modules: [
     '@pinia/nuxt',
     'nuxt-auth-utils',
-    'nuxt-google-auth'
+    'nuxt-google-auth',
+    '@bootstrap-vue-next/nuxt'
   ],
 
   googleAuth: {
